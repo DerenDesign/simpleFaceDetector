@@ -42,13 +42,13 @@ while True:
     #Converts frame into grayscale to improve face detection
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.1, 5)
-
+ 
     for (x, y, w, h) in faces:
         if use_helmet:
             # Resize and position helmet slightly above the head
-            helmet_resized = cv2.resize(helmet, (w, int(h * 0.6)))
-            hx = x
-            hy = y - int(h * 0.5)  # raise above face, can be adjusted based of user
+            helmet_resized = cv2.resize(helmet, (int(w*1.3), int(h*1.3)))
+            hx = x - int(w * 0.2)  # adjust to center helmet
+            hy = y - int(h * 0.2)  # raise above face, can be adjusted based of user
             overlay(frame, helmet_resized, hx, hy)
         else:
             # Resize and position mustache below nose 
